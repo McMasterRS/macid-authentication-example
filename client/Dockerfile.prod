@@ -1,0 +1,28 @@
+FROM node:16-alpine AS base
+
+ARG MAC_AZURE_CLIENT_ID
+ARG MAC_AZURE_TENANT_ID
+ARG MAC_AZURE_REDIRECT_URI
+
+FROM base AS dependencies
+WORKDIR /client
+COPY package.json package-lock.json /client/
+RUN npm ci
+
+FROM base AS builder
+WORKDIR /client
+COPY --from=dependencies /client/node_modules/ /client/node_modules/
+COPY . /client
+# to disable telemetry in next.js, uncomment the following line
+# ENV NEXT_TELEMETRY_DISABLED 1
+RUN npm run build
+
+FROM base AS runner
+WORKDIR /client
+ENV NODE_ENV production
+COPY --from=builder /client/public/ /client/public/
+COPY --from=builder /client/.next/ /client/.next/
+COPY --from=builder /client/node_modules/ /client/node_modules/
+COPY package.json /client/
+EXPOSE 3000
+CMD npm run start

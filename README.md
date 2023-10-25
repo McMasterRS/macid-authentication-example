@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# macid-authentication-example
 
-## Getting Started
+### Description
+A sample project that shows developers how they can add Single Sign-On (SSO) to their Next.js single-page application to allow users to sign using their MacID credentials.
 
-First, run the development server:
+## Build
 
+### Requirements
+
+- [Docker](https://docs.docker.com/engine/install/) 20.10 or newer
+- [docker-compose](https://docs.docker.com/compose/install/) 1.29 or newer
+
+### Usage
+
+To build and run the container, simply run:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker-compose -p $USERNAME-container --env-file config/.env.development.local up --build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`.env.development.local` or `.env.*.local` in the `config` directory is an environment file containing all environment variables required by the docker images (and `next`), including:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `HOST_PORT`
+- `MAC_AZURE_CLIENT_ID`
+- `MAC_AZURE_TENANT_ID`
+- `MAC_AZURE_REDIRECT_URI`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+You may duplicate the `.env.sample` file and fill out the variables to create your own environment file.
 
-## Learn More
+By default, the Next.js frontend service (`app`) will attach at port 3000 and Flask backend service (`server`) will attach at port 5000 on the host.
 
-To learn more about Next.js, take a look at the following resources:
+When working on the development server, you will first need to fill in the port number for which the NGINX service is attached to the server in `docker-compose.yaml` using the environment variable `HOST_PORT`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Please also refer to the `README.md` files in [`client/`](client/README.md) and [`nginx/`](nginx/README.md).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Production Usage
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To build and run the container in a production environment, simply run:
+```bash
+docker-compose --file docker-compose.production.yaml --env-file config/.env.production.local up --build
+```

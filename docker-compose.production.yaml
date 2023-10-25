@@ -1,0 +1,28 @@
+services:
+  client:
+    build:
+      context: client/
+      dockerfile: Dockerfile.prod
+      args:
+        MAC_AZURE_CLIENT_ID: ${MAC_AZURE_CLIENT_ID}
+        MAC_AZURE_TENANT_ID: ${MAC_AZURE_TENANT_ID}
+        MAC_AZURE_REDIRECT_URI: ${MAC_AZURE_REDIRECT_URI}
+    ports:
+      - 3000
+    environment:
+      - TZ=America/Toronto
+  nginx:
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile.prod
+    ports:
+      - "443:443"
+      - "${HOST_PORT}:${HOST_PORT}"
+    environment:
+      - HOST_PORT=${HOST_PORT}
+    volumes:
+      - /etc/ssl/rsd-dev-passphrase:/etc/ssl/rsd-dev-passphrase
+      - /etc/ssl/certs/rsd-dev_mcmaster_ca.cer:/etc/ssl/certs/rsd-dev_mcmaster_ca.cer
+      - /etc/ssl/private/rsd-dev_mcmaster_ca-server.key:/etc/ssl/private/rsd-dev_mcmaster_ca-server.key
+    depends_on:
+      - client

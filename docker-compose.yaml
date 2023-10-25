@@ -1,0 +1,23 @@
+services:
+  auth-app:
+    build: ./client/
+    ports:
+      - 3000
+    volumes:
+      - ./client/:/client
+      - /client/node_modules
+      - ./config/.env.development.local:/client/.env.development.local:ro
+    environment:
+      - TZ=America/Toronto
+  nginx:
+    build: ./nginx/
+    ports:
+      - "${HOST_PORT}:${HOST_PORT}"
+    environment:
+      - HOST_PORT=${HOST_PORT}
+    volumes:
+      - /etc/ssl/rsd-dev-passphrase:/etc/ssl/rsd-dev-passphrase
+      - /etc/ssl/certs/rsd-dev_mcmaster_ca.cer:/etc/ssl/certs/rsd-dev_mcmaster_ca.cer
+      - /etc/ssl/private/rsd-dev_mcmaster_ca-server.key:/etc/ssl/private/rsd-dev_mcmaster_ca-server.key
+    depends_on:
+      - auth-app

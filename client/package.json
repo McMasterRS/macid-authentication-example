@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --check ./app ./components ./config",
+    "format:fix": "prettier --write ./app ./components ./config"
   },
   "dependencies": {
     "@azure/msal-browser": "^3.3.0",
@@ -26,6 +28,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "13.5.6",
+    "prettier": "^3.0.3",
     "typescript": "^5"
   }
 }

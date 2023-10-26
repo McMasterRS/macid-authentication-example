@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --check ./app ./components ./config",
-    "format:fix": "prettier --write ./app ./components ./config"
+    "format": "prettier --check ./app ./components ./app/config",
+    "format:fix": "prettier --write ./app ./components ./app/config"
   },
   "dependencies": {
     "@azure/msal-browser": "^3.3.0",

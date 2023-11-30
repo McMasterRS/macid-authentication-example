@@ -14,10 +14,11 @@ services:
     ports:
       - "${HOST_PORT}:${HOST_PORT}"
     environment:
+      - HOST_NAME=${HOST_NAME}
       - HOST_PORT=${HOST_PORT}
     volumes:
-      - /etc/ssl/rsd-dev-passphrase:/etc/ssl/myserverssl-passphrase
-      - /etc/ssl/certs/rsd-dev_mcmaster_ca.cer:/etc/ssl/certs/myserverssl.cer
-      - /etc/ssl/private/rsd-dev_mcmaster_ca-server.key:/etc/ssl/private/myserverssl.key
+      - ${SSL_CERTIFICATE_PASSPHRASE_PATH}:/etc/ssl/myserverssl-passphrase
+      - ${SSL_CERTIFICATE_PATH}:/etc/ssl/certs/myserverssl.cer
+      - ${SSL_CERTIFICATE_KEY_PATH}:/etc/ssl/private/myserverssl.key
     depends_on:
       - auth-app

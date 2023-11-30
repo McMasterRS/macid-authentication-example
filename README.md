@@ -17,12 +17,7 @@ To build and run the container, simply run:
 docker-compose -p $USERNAME-container --env-file config/.env.development.local up --build
 ```
 
-`.env.development.local` or `.env.*.local` in the `config` directory is an environment file containing all environment variables required by the docker images (and `next`), including:
-
-- `HOST_PORT`
-- `MAC_AZURE_CLIENT_ID`
-- `MAC_AZURE_TENANT_ID`
-- `MAC_AZURE_REDIRECT_URI`
+`.env.development.local` or `.env.*.local` in the `config` directory is an environment file containing all environment variables required by the docker images (and `next`).  
 
 You may duplicate the `.env.sample` file and fill out the variables to create your own environment file.
 

@@ -36,8 +36,8 @@ docker-compose --file docker-compose.production.yaml --env-file config/.env.prod
 
 ## Questions & Contribution
 
-Pull requests are always welcome. If you need help questions, you may send an email to:  
+Pull requests are always welcome. If you need help with any questions, you may send an email to:  
 - [Research Software Development Team](mailto:rsd@mcmaster.ca)
 - [Digital Research Commons Pilot (DRCP)](mailto:askresearch@mcmaster.ca)
 
-You might also reach out to [Information Security for Researchers (IS4R)](https://informationsecurity.mcmaster.ca/people/researchers/) or refer to their [SSO guideline](https://informationsecurity.mcmaster.ca/macid-authentication-options-at-mcmaster-university/).  
+You might also want to reach out to [Information Security for Researchers (IS4R)](https://informationsecurity.mcmaster.ca/people/researchers/) or refer to their [SSO guideline](https://informationsecurity.mcmaster.ca/macid-authentication-options-at-mcmaster-university/).  

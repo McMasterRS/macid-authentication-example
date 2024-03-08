@@ -47,7 +47,7 @@ export const PageLayout = (props: PageLayoutProps) => {
             >
               Microsoft Identity Platform
             </Typography>
-            <Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
               <Button
                 key={"Page 1"}
                 onClick={handleCloseNavMenu}
@@ -56,6 +56,16 @@ export const PageLayout = (props: PageLayoutProps) => {
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 Page 1
+              </Button>
+
+              <Button
+                key={"Page 2"}
+                onClick={handleCloseNavMenu}
+                component={Link}
+                href={"/page_2"}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Page 2
               </Button>
             </Box>
             <Box
